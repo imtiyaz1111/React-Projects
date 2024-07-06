@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Mulish:wght@300;400&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.contact{
+    background-color: black;
+}
+.adress{
+    border-radius: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #2f2f2f;
+}
+.form{
+    border: 2px solid #2f2f2f ;
+    padding: 10px 10px 10px 10px;
+    border-radius: 20px;
+}
+.form-control{
+    background-color: black;
+}
+
+

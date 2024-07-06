@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Mulish:wght@300;400&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.blog{
+    background-color: black;
+}
+.box{
+    background-color: white;
+    border-radius: 30px;
+}
+.mainbox{
+    padding-left: 10px;
+}
+.box img{
+    height: 100%;
+    width: 100%;
+}
+.btn{
+    border: 2px solid orange;
+    background-color: orange;
+    margin-bottom: 20px;
+}
+.btn:hover{
+    border: 2px solid orange;
+    background-color: white;
+    color: black;
+}

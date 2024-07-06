@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Mulish:wght@300;400&display=swap');
+
+.skill{
+    background-color: black;
+}
+.left-side img{
+    height: 90%;
+    width: 90%;
+}
+.right-seide{
+    padding-top: 200px;
+}
+.right-seide h1{
+    font-size: 50px;
+}
+@media only screen and (max-width: 998px) {
+    .right-seide{
+        padding-top: 30px;
+    }
+  }
