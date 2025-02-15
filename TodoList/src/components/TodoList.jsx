@@ -1,88 +1,82 @@
 import { React, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const TodoList = () => {
-  const [input, setInput] = useState("");
-  const [items, setItems] = useState([]);
-  const handleInput = (e) => {
-    const data = e.target.value;
-    setInput(data);
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+  const [editingIndex, setEditingIndex] = useState(null);
+
+  //   onChange
+  const handleOnchange = (e) => {
+    setNewTask(e.target.value);
   };
-//   add items
-  const addItem = () => {
-    if(!input)
-    {
-      toast.error("please fill your task")
-    }
-    else{
-      // const allInputData={id: new Date().getTime().toString(), name:input}
-      setItems([...items,input])
-      setInput("")
-    }
+  // add-task
+  const addTask = () => {
+    setTasks([...tasks, newTask]);
+    setNewTask("");
   };
-//   delete items
-  const deleteItems = (id) => {
-    const updateItems = items.filter((curEle, index) => {
+
+  //   update-task
+  const updateTask = () => {
+    setTasks(tasks.map((task, index) => (index === editingIndex ? newTask : task)));
+    setEditingIndex(null);
+    setNewTask("");
+  };
+
+  //   edit-task
+  const editTask = (index) => {
+    setNewTask(tasks[index]);
+    setEditingIndex(index);
+  };
+
+  //   delete-task
+  const deleteTask = (id) => {
+    const updateItems = tasks.filter((_, index) => {
       return index !== id;
     });
-    toast("Delete Successfully")
-    setItems(updateItems);
+    setTasks(updateItems);
   };
-//   delete all items
-  const allDeleteItems = () => {
-    toast("All Delete Successfully")
-    setItems([]);
-  };
-  // mark completed
-  const mark=()=>{
-    toast("Mark As Completed")
-
-  }
   return (
-    <div className="TodoWrapper">
-          <ToastContainer/>
-      <h1>TodoList!</h1>
-      <div className="TodoForm">
-        <input
-          type="text"
-          className="todo-input"
-          placeholder="What is the task today?"
-          onChange={handleInput}
-          value={input}
-        />
-        <button onClick={addItem} className="todo-btn">
-          Add Task
-        </button>
-      </div>
-      {/* todo items */}
-      <div className="items">
-        {items.map((curEle,index) => {
-          return (
-            <>
-              <div className="Todo" key={index}>
-                <input type="checkbox"  onClick={mark} name="" id="" />
-                <p> {curEle}</p>
-                <div>
-                  <FontAwesomeIcon
-                    className="delete-icon"
-                    onClick={()=>deleteItems(index)}
-                    icon={faTrash}
-                  />
-                </div>
+    <>
+      <div className="todo-container">
+        <h1 className="todo-title">Todo List</h1>
+        <div className="todo-input-container">
+          <input
+            type="text"
+            value={newTask}
+            onChange={handleOnchange}
+            placeholder="Enter a task"
+            className="todo-input"
+          />
+          {editingIndex !== null ? (
+            <button onClick={updateTask} className="edit-button todo-button">
+              Update
+            </button>
+          ) : (
+            <button onClick={addTask} className="add-button todo-button">
+              Add
+            </button>
+          )}
+        </div>
+        <ul className="todo-list">
+          {tasks.map((task, index) => (
+            <li key={index} className="todo-item">
+              <span className="todo-text">{task}</span>
+              <div className="todo-buttons">
+                <button className="edit-button" onClick={() => editTask(index)}>
+                  Edit
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => deleteTask(index)}
+                >
+                  Delete
+                </button>
               </div>
-            </>
-          );
-        })}
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="btn">
-        <button type="submit" onClick={allDeleteItems} className="todo-btn">
-          Delete All
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 
